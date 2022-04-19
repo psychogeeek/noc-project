@@ -39,3 +39,8 @@ Route::get('/service/list', [ServiceController::class, 'store']);
 Route::get('/serviceType/create', [serviceTypeController::class, 'create']);
 Route::get('/serviceType/list', [serviceTypeController::class, 'store']);
 
+
+
+Route::get('/serviceType/create', [serviceTypeController::class, 'create']);
+Route::get('/serviceType/list', [serviceTypeController::class, 'store']);
+
