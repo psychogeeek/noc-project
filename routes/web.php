@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,30 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// user routes
-Route::get('/user/create', [UserController::class, 'create']);
-Route::post('/user/list', [UserController::class, 'store']);
-
-// pop routes
-Route::get('/pop/create', [PopController::class, 'create']);
-Route::get('/user/list', [PopController::class, 'store']);
+Route::get('/customer/create', [CustomerController::class, 'create'])->middleware(['auth'])->name('create_customer');
+Route::post('/customer/store', [CustomerController::class, 'store'])->middleware(['auth'])->name('store_customer');
 
 
-// point routes
-Route::get('/point/create', [PointController::class, 'create']);
-Route::get('/point/list', [PointController::class, 'store']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-// service routes
-Route::get('/service/create', [ServiceController::class, 'create']);
-Route::get('/service/list', [ServiceController::class, 'store']);
-
-
-// service Type routes
-Route::get('/serviceType/create', [serviceTypeController::class, 'create']);
-Route::get('/serviceType/list', [serviceTypeController::class, 'store']);
-
-
-
-Route::get('/serviceType/create', [serviceTypeController::class, 'create']);
-Route::get('/serviceType/list', [serviceTypeController::class, 'store']);
-
+require __DIR__.'/auth.php';
