@@ -62,6 +62,8 @@ class CustomerController extends Controller
         $model->password = $validated['password'];
         $model->save();
 
+        $customers = Customer::all();
+        return redirect('/customer/list');
     }
 
     /**
@@ -70,10 +72,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Customer $customer)
     {
-        dd('test');
-    }
+        $customer = Customer::find($customer);
+        return view('customer_info',compact('customer'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -83,8 +85,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::findOrFail(1);
+        $customer = Customer::find($customer);
         return view('customerEdit',compact('customer'));
+
     }
 
     /**
@@ -94,9 +97,22 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCustomerRequest $request, Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
-        //
+        $input = $request->all();
+        $customer = Customer::find($customer)->first();
+
+        $customer->first_name = $input['first_name'];
+        $customer->last_name = $input['last_name'];
+        $customer->address = $input['address'];
+        $customer->phone_number = $input['phone_number'];
+        $customer->email = $input['email'];
+        $customer->code_number = $input['code_number'];
+        $customer->password = $input['password'];
+
+        $customer->save();
+
+        return redirect('/customer/list');
     }
 
     /**
@@ -107,6 +123,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+       $customer = Customer::find($customer)->first();
+       $customer->delete();
+       return redirect('/customer/list');
+
     }
 }

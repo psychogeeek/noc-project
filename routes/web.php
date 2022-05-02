@@ -22,7 +22,10 @@ Route::get('/customer/create', [CustomerController::class, 'create'])->middlewar
 Route::post('/customer/store', [CustomerController::class, 'store'])->middleware(['auth'])->name('store_customer');
 Route::get('/customer/list', [CustomerController::class, 'index'])->middleware(['auth'])->name('customer.list');
 Route::get('/customer/{customer}', [CustomerController::class, 'show'])->middleware(['auth'])->name('customer.info');
-Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->middleware(['auth'])->name('customer.edit');
+Route::get('/customer/edit/{customer}', [CustomerController::class, 'edit'])->middleware(['auth'])->name('customer.edit');
+Route::post('/customer/update/{customer}', [CustomerController::class, 'update'])->middleware(['auth'])->name('update_customer');
+Route::get('/customer/delete/{customer}', [CustomerController::class, 'destroy'])->middleware(['auth'])->name('delete_customer');
+
 
 
 
