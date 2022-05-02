@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PopPointController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,9 @@ Route::get('/customer/{customer}', [CustomerController::class, 'show'])->middlew
 Route::get('/customer/edit/{customer}', [CustomerController::class, 'edit'])->middleware(['auth'])->name('customer.edit');
 Route::post('/customer/update/{customer}', [CustomerController::class, 'update'])->middleware(['auth'])->name('update_customer');
 Route::get('/customer/delete/{customer}', [CustomerController::class, 'destroy'])->middleware(['auth'])->name('delete_customer');
+
+
+Route::get('/popPoint/create', [PopPointController::class, 'create'])->middleware(['auth'])->name('create_popPoint');
 
 
 

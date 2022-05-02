@@ -6,7 +6,7 @@ use App\Http\Requests\StorepopPointsRequest;
 use App\Http\Requests\UpdatepopPointsRequest;
 use App\Models\popPoints;
 
-class PopPointsController extends Controller
+class PopPointController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class PopPointsController extends Controller
      */
     public function create()
     {
-        //
+        return view('createPopPoint');
     }
 
     /**

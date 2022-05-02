@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-           <h5>Create Customer Form</h5>
+           <h5>Create Pop and Point Form</h5>
         </x-slot>
 
         <!-- Validation Errors -->
@@ -23,39 +23,12 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="address" :value="__('Address')" />
+                <x-label for="type" :value="__('Type')" />
 
-                    <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus />
+                    <x-input id="type" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus />
             </div>
 
-            <div class="mt-4">
-                <x-label for="phone_number" :value="__('Phone Number')" />
 
-                <x-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="code_number" :value="__('Code Number')" />
-
-                <x-input id="code_number" class="block mt-1 w-full" type="text" name="code_number" :value="old('code_number')" required autofocus />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                         type="password"
-                         name="password"
-                         required autocomplete="new-password" />
-            </div>
 
             <!-- Confirm Password -->
 {{--            <div class="mt-4">--}}
