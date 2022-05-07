@@ -36,12 +36,18 @@
                 </tr>
 
         @empty
-            <p>No Customer</p>
+            <div style="margin-left: 15px" >
+                <p>Empty</p>
+            </div>
         @endforelse
 
 
         </tbody>
     </table>
+
+    <div style="margin-left: 15px" >
+        <a href="/customer/create"><input type="submit" value="create"></a>
+    </div>
 
 </div>
 </body>

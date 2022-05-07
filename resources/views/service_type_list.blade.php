@@ -9,38 +9,38 @@
 </head>
 <body>
 <div style="width: 100%">
-    <table style="margin: 15px ;padding: 20px ; width: 1000px ; border: 1px solid">
+    <table style="margin: 15px ;padding: 20px ; width: 400px ; border: 1px solid">
         <thead>
         <tr style="text-align: left">
             <th>id</th>
             <th>name</th>
-            <th>address</th>
-            <th>type</th>
+            <th>number</th>
         </tr>
         </thead>
         <tbody >
 
-        @forelse ($poppoints as $poppoint)
+        @forelse ($servicetypes  as $servicetype)
 
-                <tr id="{{ $poppoint->id }}">
-                        <td> <a href="/popPoint/{{ $poppoint->id }}"> {{ $poppoint->id }}</a> </td>
-                        <td>{{ $poppoint->name }}</td>
-                        <td>{{ $poppoint->address }}</td>
-                        <td>{{ $poppoint->type }}</td>
+                <tr id="{{ $servicetype->id }}">
+                        <td> <a href="/serviceType/{{ $servicetype->id }}"> {{ $servicetype->id }}</a> </td>
+                        <td>{{ $servicetype->name }}</td>
+                        <td>{{ $servicetype->number }}</td>
                 </tr>
 
         @empty
+
             <div style="margin-left: 15px" >
                 <p>Empty</p>
             </div>
+
         @endforelse
+
 
 
         </tbody>
     </table>
-
     <div style="margin-left: 15px" >
-        <a href="/popPoint/create"><input type="submit" value="create"></a>
+        <a href="/serviceType/create"><input type="submit" value="create"></a>
     </div>
 
 </div>

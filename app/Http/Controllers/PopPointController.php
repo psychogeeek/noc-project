@@ -27,7 +27,7 @@ class PopPointController extends Controller
      */
     public function create()
     {
-        return view('createPopPoint');y
+        return view('createPopPoint');
     }
 
     /**
@@ -42,7 +42,7 @@ class PopPointController extends Controller
             'name' => 'required|unique:pop_points',
             'address' => 'required',
             'type' => 'required',
-            
+
         ]);
         // dd($validated);
 
@@ -51,12 +51,11 @@ class PopPointController extends Controller
         $model->address = $validated['address'];
         $model->type = $validated['type'];
 
-        
-        $model->save();
-        dd($model);
 
-        $customers = Customer::all();
-        return redirect('/customer/list');
+        $model->save();
+
+
+        return redirect('/popPoint/list');
     }
 
     /**
@@ -69,7 +68,7 @@ class PopPointController extends Controller
     {
 
         $poppoint = PopPoint::find($poppoint)->first();
-        return view('pop_point_info',compact('poppoint'));    
+        return view('pop_point_info',compact('poppoint'));
 
     }
 
@@ -83,7 +82,7 @@ class PopPointController extends Controller
     {
         $poppoint = PopPoint::find($poppoint)->first();
         // dd($poppoint);
-        return view('pop_point_edit',compact('poppoint'));    
+        return view('pop_point_edit',compact('poppoint'));
 
     }
 
@@ -100,7 +99,7 @@ class PopPointController extends Controller
             'name' => 'required|unique:pop_points',
             'address' => 'required',
             'type' => 'required',
-            
+
         ]);
         // dd($validated['name']);
 
@@ -108,11 +107,11 @@ class PopPointController extends Controller
         // dd($model);
         $model->name = $validated['name'];
         $model->address = $validated['address'];
-        $model->type = $validated['type'];    
+        $model->type = $validated['type'];
         $model->save();
         return redirect('/popPoint/list');
 
-        
+
     }
 
     /**

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceTypeRequest;
 use App\Http\Requests\UpdateServiceTypeRequest;
+use App\Models\PopPoint;
 use App\Models\ServiceType;
+use Illuminate\Http\Request;
 
 class ServiceTypeController extends Controller
 {
@@ -15,7 +17,12 @@ class ServiceTypeController extends Controller
      */
     public function index()
     {
-        //
+        $test = ServiceType::find(1)->first();
+        dd($test->poppoints);
+
+
+        $servicetypes = ServiceType::all();
+        return view('service_type_list' , compact('servicetypes'));
     }
 
     /**
@@ -25,7 +32,8 @@ class ServiceTypeController extends Controller
      */
     public function create()
     {
-        //
+        $poppoints = PopPoint::all();
+        return view('servicetype_create', compact('poppoints'));
     }
 
     /**
@@ -34,9 +42,21 @@ class ServiceTypeController extends Controller
      * @param  \App\Http\Requests\StoreServiceTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreServiceTypeRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:service_type',
+            'number' => 'required',
+
+        ]);
+
+        $model = new ServiceType();
+        $model->name = $validated['name'];
+        $model->number = $validated['number'];
+
+
+        $model->save();
+        dd($model);
     }
 
     /**
@@ -45,9 +65,10 @@ class ServiceTypeController extends Controller
      * @param  \App\Models\ServiceType  $serviceType
      * @return \Illuminate\Http\Response
      */
-    public function show(ServiceType $serviceType)
+    public function show(ServiceType $servicetype)
     {
-        //
+        $servicetype = ServiceType::find($servicetype)->first();
+        return view('service_type_info', compact('servicetype'));
     }
 
     /**
@@ -56,9 +77,10 @@ class ServiceTypeController extends Controller
      * @param  \App\Models\ServiceType  $serviceType
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServiceType $serviceType)
+    public function edit(ServiceType $servicetype)
     {
-        //
+        $servicetype = ServiceType::find($servicetype)->first();
+        return view('service_type_edit', compact('servicetype'));
     }
 
     /**
@@ -68,9 +90,21 @@ class ServiceTypeController extends Controller
      * @param  \App\Models\ServiceType  $serviceType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceTypeRequest $request, ServiceType $serviceType)
+    public function update(Request $request, ServiceType $servicetype)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:service_types',
+            'number' => 'required',
+
+        ]);
+        // dd($validated['name']);
+
+        $model = ServiceType::find($servicetype)->first();
+        // dd($model);
+        $model->name = $validated['name'];
+        $model->number = $validated['number'];
+        $model->save();
+        return redirect('/serviceType/list');
     }
 
     /**
@@ -79,8 +113,11 @@ class ServiceTypeController extends Controller
      * @param  \App\Models\ServiceType  $serviceType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceType $serviceType)
+    public function destroy(ServiceType $servicetype)
     {
-        //
+        $servicetype = ServiceType::find($servicetype)->first();
+        $servicetype->delete();
+        return redirect('/serviceType/list');
+
     }
 }
