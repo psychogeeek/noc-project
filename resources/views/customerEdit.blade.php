@@ -74,14 +74,9 @@
             </div>
 
             <div style="display:flex;justify-content:space-between ">
-                {{--                <x-button  >--}}
-                {{--                    {{ __('Delete') }}--}}
-                {{--                </x-button>--}}
-                {{--            <x-button class="ml-5">--}}
-                {{--                    {{ __('Edit') }}--}}
-                {{--                </x-button>--}}
+            
                 <x-button class="mr-5">
-                    {{ __('Create') }}
+                    {{ __('Done') }}
                 </x-button>
             </div>
 

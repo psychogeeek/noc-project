@@ -22,18 +22,16 @@
         </tr>
         </thead>
         <tbody >
-{{--        <td> <a href="/customer/{{ $customer->id }}"> {{ $customer->id }}</a> </td>--}}
 
-
-        <tr {{ $customer[0]['id'] }}>
-                        <td>{{ $customer[0]['id'] }}</td>
-                        <td>{{ $customer[0]['first_name'] }}</td>
-                        <td>{{ $customer[0]['last_name'] }}</td>
-                        <td>{{ $customer[0]['address'] }}</td>
-                        <td>{{ $customer[0]['phone_number'] }}</td>
-                        <td>{{ $customer[0]['code_number'] }}</td>
-                        <td>{{ $customer[0]['email'] }}</td>
-                </tr>
+        <tr>
+            <td>{{ $customer[0]['id'] }}</td>
+            <td>{{ $customer[0]['first_name'] }}</td>
+            <td>{{ $customer[0]['last_name'] }}</td>
+            <td>{{ $customer[0]['address'] }}</td>
+            <td>{{ $customer[0]['phone_number'] }}</td>
+            <td>{{ $customer[0]['code_number'] }}</td>
+            <td>{{ $customer[0]['email'] }}</td>
+        </tr>
 
         </tbody>
     </table>

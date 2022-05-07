@@ -29,6 +29,12 @@ Route::get('/customer/delete/{customer}', [CustomerController::class, 'destroy']
 
 
 Route::get('/popPoint/create', [PopPointController::class, 'create'])->middleware(['auth'])->name('create_popPoint');
+Route::post('/popPoint/store', [PopPointController::class, 'store'])->middleware(['auth'])->name('store_pop_point');
+Route::get('/popPoint/list', [PopPointController::class, 'index'])->middleware(['auth'])->name('poppoint.list');
+Route::get('/popPoint/{poppoint}', [PopPointController::class, 'show'])->middleware(['auth'])->name('poppoint.info');
+Route::get('/popPoint/edit/{poppoint}', [PopPointController::class, 'edit'])->middleware(['auth'])->name('poppoint.edit');
+Route::post('/popPoint/update/{poppoint}', [PopPointController::class, 'update'])->middleware(['auth'])->name('poppoint.update');
+Route::get('/popPoint/delete/{poppoint}', [PopPointController::class, 'destroy'])->middleware(['auth'])->name('poppoint.delete');
 
 
 
