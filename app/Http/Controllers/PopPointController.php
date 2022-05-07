@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorepopPointsRequest;
 use App\Http\Requests\UpdatepopPointsRequest;
-use App\Models\popPoints;
+use Illuminate\Http\Request;
+use App\Models\PopPoint;
 
 class PopPointController extends Controller
 {
@@ -15,7 +16,8 @@ class PopPointController extends Controller
      */
     public function index()
     {
-        //
+        $poppoints = PopPoint::all();
+        return view('pop_point_list', compact('poppoints'));
     }
 
     /**
@@ -34,9 +36,27 @@ class PopPointController extends Controller
      * @param  \App\Http\Requests\StorepopPointsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorepopPointsRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:pop_points',
+            'address' => 'required',
+            'type' => 'required',
+            
+        ]);
+        // dd($validated);
+
+        $model = new PopPoint();
+        $model->name = $validated['name'];
+        $model->address = $validated['address'];
+        $model->type = $validated['type'];
+
+        
+        $model->save();
+        dd($model);
+
+        $customers = Customer::all();
+        return redirect('/customer/list');
     }
 
     /**
@@ -45,9 +65,12 @@ class PopPointController extends Controller
      * @param  \App\Models\popPoints  $popPoints
      * @return \Illuminate\Http\Response
      */
-    public function show(popPoints $popPoints)
+    public function show(PopPoint $poppoint)
     {
-        //
+
+        $poppoint = PopPoint::find($poppoint)->first();
+        return view('pop_point_info',compact('poppoint'));    
+
     }
 
     /**
@@ -56,9 +79,12 @@ class PopPointController extends Controller
      * @param  \App\Models\popPoints  $popPoints
      * @return \Illuminate\Http\Response
      */
-    public function edit(popPoints $popPoints)
+    public function edit(PopPoint $poppoint)
     {
-        //
+        $poppoint = PopPoint::find($poppoint)->first();
+        // dd($poppoint);
+        return view('pop_point_edit',compact('poppoint'));    
+
     }
 
     /**
@@ -68,9 +94,25 @@ class PopPointController extends Controller
      * @param  \App\Models\popPoints  $popPoints
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatepopPointsRequest $request, popPoints $popPoints)
+    public function update(Request $request, PopPoint $poppoint)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:pop_points',
+            'address' => 'required',
+            'type' => 'required',
+            
+        ]);
+        // dd($validated['name']);
+
+        $model = PopPoint::find($poppoint)->first();
+        // dd($model);
+        $model->name = $validated['name'];
+        $model->address = $validated['address'];
+        $model->type = $validated['type'];    
+        $model->save();
+        return redirect('/popPoint/list');
+
+        
     }
 
     /**
@@ -79,8 +121,11 @@ class PopPointController extends Controller
      * @param  \App\Models\popPoints  $popPoints
      * @return \Illuminate\Http\Response
      */
-    public function destroy(popPoints $popPoints)
+    public function destroy(PopPoint $poppoint)
     {
-        //
+        $poppoint = PopPoint::find($poppoint)->first();
+        $poppoint->delete();
+        return redirect('/popPoint/list');
+
     }
 }

@@ -7,19 +7,19 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('store_pop_point') }}">
+        <form method="POST" action="{{ route('poppoint.update' , $poppoint->id ) }}">
         @csrf
         <!-- Name -->
             <div class="mt-4">
                 <x-label for="name" :value="__('Name')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('first_name')" required autofocus />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{old('name', $poppoint->name)}}" required autofocus />
             </div>
 
             <div class="mt-4">
                 <x-label for="address" :value="__('Address')" />
 
-                <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('last_name')" required autofocus />
+                <x-input id="address" class="block mt-1 w-full" type="text" name="address" value="{{old('address', $poppoint->address)}}" required autofocus />
             </div>
 
             <div class="mt-4">

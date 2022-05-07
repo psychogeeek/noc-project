@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class popPoints extends Model
+class PopPoint extends Model
 {
     use HasFactory;
 }
