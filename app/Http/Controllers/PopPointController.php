@@ -25,7 +25,7 @@ class PopPointController extends Controller
      */
     public function create()
     {
-        return view('createPopPoint');
+        return view('createPopPoint');y
     }
 
     /**
