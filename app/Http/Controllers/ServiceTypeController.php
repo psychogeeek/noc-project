@@ -17,10 +17,6 @@ class ServiceTypeController extends Controller
      */
     public function index()
     {
-        $test = ServiceType::find(1)->first();
-        dd($test->poppoints);
-
-
         $servicetypes = ServiceType::all();
         return view('service_type_list' , compact('servicetypes'));
     }
@@ -45,19 +41,20 @@ class ServiceTypeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:service_type',
+            'name' => 'required|unique:service_types',
             'number' => 'required',
-
+            'info' => 'required',
         ]);
 
         $model = new ServiceType();
+
         $model->name = $validated['name'];
         $model->number = $validated['number'];
-
-
         $model->save();
-        dd($model);
-    }
+        $info = $validated['info'];
+        $model->poppoints()->attach($info);
+        return redirect('/serviceType/list');
+            }
 
     /**
      * Display the specified resource.

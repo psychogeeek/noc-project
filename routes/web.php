@@ -40,7 +40,7 @@ Route::get('/popPoint/delete/{poppoint}', [PopPointController::class, 'destroy']
 
 Route::get('/serviceType/create', [ServiceTypeController::class, 'create'])->middleware(['auth'])->name('create_service_type');
 Route::post('/serviceType/store', [ServiceTypeController::class, 'store'])->middleware(['auth'])->name('store_service_type');
-Route::get('/serviceType/list', [ServiceTypeController::class, 'index'])->middleware(['auth'])->name('store_service_list');
+Route::get('/serviceType/list', [ServiceTypeController::class, 'index'])->middleware(['auth'])->name('service_type_list');
 Route::get('/serviceType/{servicetype}', [ServiceTypeController::class, 'show'])->middleware(['auth'])->name('store_service_info');
 Route::get('/serviceType/edit/{servicetype}', [ServiceTypeController::class, 'edit'])->middleware(['auth'])->name('service_type_edit');
 Route::post('/serviceType/update/{servicetype}', [ServiceTypeController::class, 'update'])->middleware(['auth'])->name('service_type_update');
