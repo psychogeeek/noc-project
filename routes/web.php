@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PopPointController;
 use App\Http\Controllers\ServiceTypeController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::get('/serviceType/{servicetype}', [ServiceTypeController::class, 'show'])
 Route::get('/serviceType/edit/{servicetype}', [ServiceTypeController::class, 'edit'])->middleware(['auth'])->name('service_type_edit');
 Route::post('/serviceType/update/{servicetype}', [ServiceTypeController::class, 'update'])->middleware(['auth'])->name('service_type_update');
 Route::get('/serviceType/delete/{servicetype}', [ServiceTypeController::class, 'destroy'])->middleware(['auth'])->name('service_type_delete');
+
+Route::get('/service/create', [ServiceController::class, 'create'])->middleware(['auth'])->name('create_type');
+Route::post('/service/store', [ServiceController::class, 'store'])->middleware(['auth'])->name('store_type');
+
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceTypeRequest;
 use App\Http\Requests\UpdateServiceTypeRequest;
+use App\Models\Customer;
 use App\Models\PopPoint;
 use App\Models\ServiceType;
 use Illuminate\Http\Request;
@@ -77,7 +78,9 @@ class ServiceTypeController extends Controller
     public function edit(ServiceType $servicetype)
     {
         $servicetype = ServiceType::find($servicetype)->first();
-        return view('service_type_edit', compact('servicetype'));
+        $poppoints = PopPoint::all();
+        $customers = Customer::all();
+        return view('service_type_edit', compact('servicetype','poppoints' , 'customers'));
     }
 
     /**

@@ -14,7 +14,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('store_service') }}">
+        <form method="POST" action="{{ route('store_service_type') }}">
         @csrf
         <!-- Name -->
             <div class="mt-4">
@@ -33,15 +33,27 @@
                 <br>
             </div>
                 <label for="id_label_single">
-                    <x-label for="poppoint" :value="__('Pop and Point')" />
-
-                    <select name="info[]" id="pop_point" class="types js-states form-control js-example-responsive" style="width: 100%"  multiple="multiple">
-                        @foreach($poppoints as $poppoint)
-                            <option value="{{$poppoint->id}}">{{$poppoint->name . "-" . $poppoint->type}} </option>
+                    <x-label for="servicetype" :value="__('Service Types')"/>
+                    <select name="service_type" id="serviceType" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-depndemt = "service_type" >
+                        @foreach($servicetypes as $servicetype)
+                            <option value="{{$servicetype->id}}">{{$servicetype->name}} </option>
                         @endforeach
                     </select>
-
                 </label>
+
+            <div>
+                <br>
+            </div>
+
+            <label for="id_label_single">
+                <x-label for="poppoint" :value="__('Pop and Point')" />
+                <select name="info[]" id="pop_point" class="type js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" >
+                    @foreach($poppoints as $poppoint)
+                        <option value="{{$poppoint->id}}">{{$poppoint->name . "-" . $poppoint->type}} </option>
+                    @endforeach
+                </select>
+
+            </label>
                 <div>
                     <br>
 
@@ -73,6 +85,7 @@
                     $('.types').select2();
                 });
             </script>
+
 
 
 

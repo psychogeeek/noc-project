@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\PopPoint;
 use App\Models\Service;
+use App\Models\ServiceType;
 
 class ServiceController extends Controller
 {
@@ -25,7 +27,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $poppoints = PopPoint::all();
+        $servicetypes = ServiceType::all();
+        return view('service_create' , compact('poppoints' , 'servicetypes'));
     }
 
     /**
