@@ -47,8 +47,10 @@ Route::get('/serviceType/edit/{servicetype}', [ServiceTypeController::class, 'ed
 Route::post('/serviceType/update/{servicetype}', [ServiceTypeController::class, 'update'])->middleware(['auth'])->name('service_type_update');
 Route::get('/serviceType/delete/{servicetype}', [ServiceTypeController::class, 'destroy'])->middleware(['auth'])->name('service_type_delete');
 
-Route::get('/service/create', [ServiceController::class, 'create'])->middleware(['auth'])->name('create_type');
-Route::post('/service/store', [ServiceController::class, 'store'])->middleware(['auth'])->name('store_type');
+Route::get('/service/create', [ServiceController::class, 'create'])->middleware(['auth'])->name('create_service');
+Route::post('/service/store', [ServiceController::class, 'store'])->middleware(['auth'])->name('store_service');
+Route::post('/service/create/fetch', [ServiceController::class, 'fetch'])->middleware(['auth'])->name('fetch_service');
+
 
 
 

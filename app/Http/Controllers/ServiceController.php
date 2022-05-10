@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateServiceRequest;
 use App\Models\PopPoint;
 use App\Models\Service;
 use App\Models\ServiceType;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -20,7 +22,27 @@ class ServiceController extends Controller
         //
     }
 
-    /**
+    function fetch(Request $request)
+    {
+        $select = $request->get('select');
+//        dd($select);
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = $request->get('dependent');
+        $servicetypes = ServiceType::find(9);
+        $data = $servicetypes->poppoints;
+//        $data = DB::table('pop_point_service_types')->where($select, $value)->get();
+
+        $output = '<option value="">Select</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->id.'">'.$row->name.'</option>';
+        }
+        echo $output;
+    }
+
+
+/**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

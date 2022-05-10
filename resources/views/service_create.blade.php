@@ -14,7 +14,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('store_service_type') }}">
+        <form method="POST" action="{{ route('fetch_service') }}">
         @csrf
         <!-- Name -->
             <div class="mt-4">
@@ -34,11 +34,14 @@
             </div>
                 <label for="id_label_single">
                     <x-label for="servicetype" :value="__('Service Types')"/>
-                    <select name="service_type" id="serviceType" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-depndemt = "service_type" >
+
+                    <select name="servicetype" id="service_type_id" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-dependent ="pop_point_id" >
+                        <option value="">Select</option>
                         @foreach($servicetypes as $servicetype)
                             <option value="{{$servicetype->id}}">{{$servicetype->name}} </option>
                         @endforeach
                     </select>
+
                 </label>
 
             <div>
@@ -47,29 +50,21 @@
 
             <label for="id_label_single">
                 <x-label for="poppoint" :value="__('Pop and Point')" />
-                <select name="info[]" id="pop_point" class="type js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" >
+
+                <select name="poppoint" id="pop_point_id" class="type js-states form-control js-example-responsive input-lg" style="width: 100%" >
+                    <option value="">Select</option>
                     @foreach($poppoints as $poppoint)
                         <option value="{{$poppoint->id}}">{{$poppoint->name . "-" . $poppoint->type}} </option>
                     @endforeach
                 </select>
 
             </label>
+
                 <div>
                     <br>
-
-
                 </div>
-{{--                <label for="id_label_multiple">--}}
-{{--                    <select class="types js-states form-control js-example-responsive" style="width: 50%" id="id_label_multiple" multiple="multiple"> </select>--}}
-{{--                </label>--}}
-
-            <div>
-                <br>
-            </div>
-
 
             <div style="display:flex;justify-content:space-between ">
-
                 <x-button class="mr-5">
                     {{ __('Create') }}
                 </x-button>
@@ -85,39 +80,42 @@
                     $('.types').select2();
                 });
             </script>
+        <script>
+            $(document).ready(function() {
+                $('.type').select2();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function(){
+
+                $('.dynamic').change(function(){
+
+                    if($(this).val() != ''){
+                        var select = $(this).attr("id");
+                        var value = $(this).val();
+                        var dependent = $(this).data('dependent');
+                        var _token = $('input[name="_token"]').val();
+                        console.log(select,value,dependent)
+                        $.ajax({
+                            url:"{{ route('fetch_service') }}",
+                            method:"POST",
+                            data:{select:select, value:value, _token:_token, dependent:dependent},
+                            success:function(result)
+                            {
+                                $('#'+dependent).html(result);
+                            }
+
+                        })
+                    }
+                });
+
+
+            });
+        </script>
 
 
 
-
-
-
-
-
-{{--        <script>--}}
-
-{{--        $(document).ready(function() {--}}
-{{--                $('.js-example-basic-multiple').select2();--}}
-{{--            });--}}
-{{--            $('#mySelect2').select2({--}}
-{{--                dropdownParent: $('#myModal')--}}
-{{--            });--}}
-{{--            $('.js-example-basic-single').select2({--}}
-{{--                placeholder: 'Select an option'--}}
-{{--            });--}}
-
-{{--            $(".js-example-disabled").select2();--}}
-{{--            $(".js-example-disabled-multi").select2();--}}
-
-{{--            $(".js-programmatic-enable").on("click", function () {--}}
-{{--                $(".js-example-disabled").prop("disabled", false);--}}
-{{--                $(".js-example-disabled-multi").prop("disabled", false);--}}
-{{--            });--}}
-
-{{--            $(".js-programmatic-disable").on("click", function () {--}}
-{{--                $(".js-example-disabled").prop("disabled", true);--}}
-{{--                $(".js-example-disabled-multi").prop("disabled", true);--}}
-{{--            });--}}
-{{--        </script>--}}
 
 
 
