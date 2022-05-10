@@ -29,7 +29,10 @@ class ServiceController extends Controller
         $select = $request->get('select');
         $value = $request->get('value');
         $dependent = $request->get('dependent');
-        $servicetypes = ServiceType::find(9);
+
+        return 2;
+
+        $servicetypes = ServiceType::find($value);
         $data = $servicetypes->poppoints;
 //        $data = DB::table('pop_point_service_types')->where($select, $value)->get();
 

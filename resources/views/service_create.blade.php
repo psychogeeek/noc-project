@@ -100,10 +100,16 @@
                         $.ajax({
                             url:"{{ route('fetch_service') }}",
                             method:"POST",
-                            data:{select:select, value:value, _token:_token, dependent:dependent},
+                            data:{
+                                select:select,
+                                value:value,
+                                _token:_token,
+                                dependent:dependent},
+
                             success:function(result)
                             {
-                                $('#'+dependent).html(result);
+                                // $('#'+dependent).html(result);
+                                alert(result);
                             }
 
                         })
