@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Customer;
 use App\Models\PopPoint;
 use App\Models\Service;
 use App\Models\ServiceType;
@@ -30,16 +31,14 @@ class ServiceController extends Controller
         $value = $request->get('value');
         $dependent = $request->get('dependent');
 
-        return 2;
-
         $servicetypes = ServiceType::find($value);
         $data = $servicetypes->poppoints;
 //        $data = DB::table('pop_point_service_types')->where($select, $value)->get();
-
         $output = '<option value="">Select</option>';
         foreach($data as $row)
         {
-            $output .= '<option value="'.$row->id.'">'.$row->name.'</option>';
+//            $nameType = $row->name . "-" . $row->id;
+            $output .= '<option value="'.$row->id.'"> '.$row->name .'-' .$row->type .' </option>';
         }
         echo $output;
     }
@@ -54,7 +53,8 @@ class ServiceController extends Controller
     {
         $poppoints = PopPoint::all();
         $servicetypes = ServiceType::all();
-        return view('service_create' , compact('poppoints' , 'servicetypes'));
+        $customers = Customer::all();
+        return view('service_create' , compact(array('servicetypes', 'poppoints', 'customers')));
     }
 
     /**
@@ -63,9 +63,27 @@ class ServiceController extends Controller
      * @param  \App\Http\Requests\StoreServiceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreServiceRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request);
+        $validated = $request->validate([
+            'name' => 'required|unique:service_types',
+            'address' => 'required',
+            'customer' => 'required',
+            'service_type_id' => 'required',
+            'pop_point_id' => 'required',
+        ]);
+
+        $model = new Service();
+
+        $model->name = $validated['name'];
+        $model->address = $validated['address'];
+        $model->customer = $customer['customer'];
+        $model->service_tpye_id = $validated['service_tpye_id'];
+        $model->pop_point_id = $validated['pop_point_id'];
+        $model->save();
+//        return redirect('/service/list');
+
     }
 
     /**

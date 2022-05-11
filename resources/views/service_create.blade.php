@@ -8,13 +8,18 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('fetch_service') }}">
+{{--        {{dd($customers)}}--}}
+
+        <form method="POST" action="{{ route('store_service') }}">
         @csrf
         <!-- Name -->
             <div class="mt-4">
@@ -24,16 +29,34 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="number" :value="__('Number')" />
+                <x-label for="address" :value="__('Address')" />
 
-                <x-input id="number" class="block mt-1 w-full" type="text" name="number" :value="old('last_name')" required autofocus />
+                <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus />
             </div>
 
             <div>
                 <br>
             </div>
-                <label for="id_label_single">
-                    <x-label for="servicetype" :value="__('Service Types')"/>
+
+            <label for="id_label_single">
+                    <x-label for="cusotmers" :value="__('Customer')"/>
+                <select name="customers" id="customers" class="type js-states form-control js-example-responsive" style="width: 100%" >
+                    <option value="">Select</option>
+
+                    @foreach($customers as $customer)
+                        <option value="{{$customer->id}}">{{$customer->name}} </option>
+                    @endforeach
+
+
+                </select>
+            </label>
+
+            <div>
+                <br>
+            </div>
+
+            <label for="id_label_single">
+                    <x-label for="servicetype" :value="__('Service Type')"/>
 
                     <select name="servicetype" id="service_type_id" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-dependent ="pop_point_id" >
                         <option value="">Select</option>
@@ -41,7 +64,6 @@
                             <option value="{{$servicetype->id}}">{{$servicetype->name}} </option>
                         @endforeach
                     </select>
-
                 </label>
 
             <div>
@@ -108,14 +130,19 @@
 
                             success:function(result)
                             {
-                                // $('#'+dependent).html(result);
-                                alert(result);
+                                $('#'+dependent).html(result);
+                                // alert(result);
                             }
 
                         })
                     }
                 });
 
+
+            });
+
+            $('#service_type_id').change(function(){
+                $('#pop_point_id').val('');
 
             });
         </script>
