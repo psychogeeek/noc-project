@@ -39,8 +39,8 @@
             </div>
 
             <label for="id_label_single">
-                    <x-label for="cusotmers" :value="__('Customer')"/>
-                <select name="customers" id="customers" class="type js-states form-control js-example-responsive" style="width: 100%" >
+                    <x-label for="customers" :value="__('Customer')"/>
+                <select name="customers" id="customers" class="customer js-states form-control js-example-responsive input-lg" style="width: 100%" >
                     <option value="">Select</option>
 
                     @foreach($customers as $customer)
@@ -97,6 +97,13 @@
 
             <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.customer').select2();
+            });
+        </script>
+
             <script>
                 $(document).ready(function() {
                     $('.types').select2();
@@ -107,6 +114,7 @@
                 $('.type').select2();
             });
         </script>
+
 
         <script>
             $(document).ready(function(){
