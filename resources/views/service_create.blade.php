@@ -38,16 +38,46 @@
                 <br>
             </div>
 
+{{--            <label for="id_label_single1">--}}
+{{--                    <x-label for="customers" :value="__('Customer')"/>--}}
+{{--                <select name="customers" id="customers" class="customers js-states form-control js-example-responsive input-lg" style="width: 100%" >--}}
+{{--                    <option value="">Select</option>--}}
+
+{{--                    @foreach($customers as $customer)--}}
+{{--                        <option value="{{$customer->id}}">{{$customer->name}} </option>--}}
+{{--                    @endforeach--}}
+
+{{--                </select>--}}
+{{--            </label>--}}
+
+{{--            <div>--}}
+{{--                <br>--}}
+{{--            </div>--}}
+
+{{--            <label for="id_label_single1">--}}
+{{--                <x-label for="customers" :value="__('Customer')"/>--}}
+{{--                <select name="customers" id="customers"  style="width: 100%" >--}}
+{{--                    <option value="">Select</option>--}}
+
+{{--                    @foreach($customers as $customer)--}}
+{{--                        <option value="{{$customer->id}}">{{$customer->name}} </option>--}}
+{{--                    @endforeach--}}
+
+{{--                </select>--}}
+{{--            </label>--}}
+
+{{--            <div>--}}
+{{--                <br>--}}
+{{--            </div>--}}
+
             <label for="id_label_single">
-                    <x-label for="customers" :value="__('Customer')"/>
-                <select name="customers" id="customers" class="customer js-states form-control js-example-responsive input-lg" style="width: 100%" >
+                <x-label for="customers" :value="__('Customer')"/>
+
+                <select name="customer_id" id="customer" class="customers js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" >
                     <option value="">Select</option>
-
                     @foreach($customers as $customer)
-                        <option value="{{$customer->id}}">{{$customer->name}} </option>
+                        <option value="{{$customer->id}}">{{$customer->first_name . ' ' .$customer->last_name}} </option>
                     @endforeach
-
-
                 </select>
             </label>
 
@@ -58,7 +88,7 @@
             <label for="id_label_single">
                     <x-label for="servicetype" :value="__('Service Type')"/>
 
-                    <select name="servicetype" id="service_type_id" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-dependent ="pop_point_id" >
+                    <select name="service_type_id" id="service_type_id" class="types js-states form-control js-example-responsive input-lg dynamic" style="width: 100%" data-dependent ="pop_point_id" >
                         <option value="">Select</option>
                         @foreach($servicetypes as $servicetype)
                             <option value="{{$servicetype->id}}">{{$servicetype->name}} </option>
@@ -73,7 +103,7 @@
             <label for="id_label_single">
                 <x-label for="poppoint" :value="__('Pop and Point')" />
 
-                <select name="poppoint" id="pop_point_id" class="type js-states form-control js-example-responsive input-lg" style="width: 100%" >
+                <select name="pop_point_id" id="pop_point_id" class="type js-states form-control js-example-responsive input-lg" style="width: 100%" >
                     <option value="">Select</option>
                     @foreach($poppoints as $poppoint)
                         <option value="{{$poppoint->id}}">{{$poppoint->name . "-" . $poppoint->type}} </option>
@@ -98,12 +128,6 @@
             <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                $('.customer').select2();
-            });
-        </script>
-
             <script>
                 $(document).ready(function() {
                     $('.types').select2();
@@ -112,6 +136,12 @@
         <script>
             $(document).ready(function() {
                 $('.type').select2();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.customers').select2();
             });
         </script>
 

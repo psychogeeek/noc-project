@@ -65,7 +65,6 @@ class ServiceTypeController extends Controller
      */
     public function show(ServiceType $servicetype)
     {
-        $servicetype = ServiceType::find($servicetype)->first();
         return view('service_type_info', compact('servicetype'));
     }
 
@@ -77,6 +76,7 @@ class ServiceTypeController extends Controller
      */
     public function edit(ServiceType $servicetype)
     {
+
         $servicetype = ServiceType::find($servicetype)->first();
         $poppoints = PopPoint::all();
         $customers = Customer::all();
