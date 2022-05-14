@@ -123,7 +123,21 @@ class ServiceController extends Controller
      */
     public function update(Request $request,Service $service)
     {
-
+        $validated = request->validate([
+            'name' => 'required|unique:services',
+            'address' => 'required',
+            'customer_id' => 'required',
+            'service_type_id' => 'required',
+            'pop_point_id' => 'required',
+        ]);
+        $model = Service::find($service)->first();
+        $model->name = validated['name'];
+        $model->name = validated['address'];
+        $model->name = validated['customer_id'];
+        $model->name = validated['service_user_id'];
+        $model->name = validated['pop_point_id'];
+        $model->save();
+        dd($model);
     }
 
     /**
