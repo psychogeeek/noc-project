@@ -54,6 +54,7 @@ Route::get('/service/list', [ServiceController::class, 'index'])->middleware(['a
 Route::get('/service/{service}', [ServiceController::class, 'show'])->middleware(['auth'])->name('service_info');
 Route::get('/service/edit/{service}', [ServiceController::class, 'edit'])->middleware(['auth'])->name('edit_service');
 Route::post('/service/update/{service}', [ServiceController::class, 'update'])->middleware(['auth'])->name('service_update');
+Route::get('/service/delete/{service}', [ServiceController::class, 'destroy'])->middleware(['auth'])->name('service_delete');
 
 
 

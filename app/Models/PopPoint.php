@@ -12,4 +12,7 @@ class PopPoint extends Model
     public function servicetypes(){
         return $this->belongsToMany(ServiceType::class , 'pop_point_service_types');
     }
+    public function services(){
+        return $this->hasMany('App\Models\Service');
+    }
 }

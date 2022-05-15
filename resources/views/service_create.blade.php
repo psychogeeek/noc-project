@@ -17,7 +17,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-{{--        {{dd($customers)}}--}}
+{{--        @if({{\App\Models\Service::find($customer_id)->where($customer_id = 2)}})--}}
 
         <form method="POST" action="{{ route('store_service') }}">
         @csrf
@@ -37,38 +37,6 @@
             <div>
                 <br>
             </div>
-
-{{--            <label for="id_label_single1">--}}
-{{--                    <x-label for="customers" :value="__('Customer')"/>--}}
-{{--                <select name="customers" id="customers" class="customers js-states form-control js-example-responsive input-lg" style="width: 100%" >--}}
-{{--                    <option value="">Select</option>--}}
-
-{{--                    @foreach($customers as $customer)--}}
-{{--                        <option value="{{$customer->id}}">{{$customer->name}} </option>--}}
-{{--                    @endforeach--}}
-
-{{--                </select>--}}
-{{--            </label>--}}
-
-{{--            <div>--}}
-{{--                <br>--}}
-{{--            </div>--}}
-
-{{--            <label for="id_label_single1">--}}
-{{--                <x-label for="customers" :value="__('Customer')"/>--}}
-{{--                <select name="customers" id="customers"  style="width: 100%" >--}}
-{{--                    <option value="">Select</option>--}}
-
-{{--                    @foreach($customers as $customer)--}}
-{{--                        <option value="{{$customer->id}}">{{$customer->name}} </option>--}}
-{{--                    @endforeach--}}
-
-{{--                </select>--}}
-{{--            </label>--}}
-
-{{--            <div>--}}
-{{--                <br>--}}
-{{--            </div>--}}
 
             <label for="id_label_single">
                 <x-label for="customers" :value="__('Customer')"/>

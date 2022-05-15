@@ -18,6 +18,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
+//        $customers = Customer::find(2);
+//        dd($customers->services);
         return view('customerList', compact('customers'));
     }
 
